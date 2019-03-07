@@ -17,16 +17,18 @@ public class MemberController {
 	
 	ModelAndView mav = new ModelAndView();
 	
+	//로그인폼 메서드
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String loginForm() {
 		return "loginForm";
 	}
 	
+	//로그인
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public ModelAndView memberLogin(HttpServletRequest request, MemberModel member) {
 		MemberModel result =  memberService.memberLogin(member);
 		
-		if(result == null) {
+		if(result == null) {	//입력한 아이디와 비밀번호가 디비에 저장되어있는 아이디 비밀번호와 일치하지 않을때
 			mav.setViewName("loginError");
 			return mav;
 
